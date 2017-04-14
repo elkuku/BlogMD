@@ -1,0 +1,17 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+
+    <h2>BlogMD</h2>
+
+    <hr/>
+    {% for post in posts %}
+        {{ post.publishedAt.format('d m Y') }}
+        <a href="{{ path('blog_post', {'slug': post.slug}) }}">{{ post.title }}</a>
+        <hr/>
+    {% else %}
+        <h2>The blog is empty :(</h2>
+    {% endfor %}
+
+{% endblock %}
+

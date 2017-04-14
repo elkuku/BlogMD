@@ -1,0 +1,23 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+
+    <h1>Markdown Help Page</h1>
+
+    {% for title, item in items %}
+        <div class="row">
+            <div class="col-xs-12 alert-info text-center"><h3>{{ title }}</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 alert-info"><h4>Markdown</h4></div>
+            <div class="col-xs-6 alert-info"><h4>HTML</h4></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <pre>{{ item.markdown }}</pre>
+            </div>
+            <div class="col-xs-6">{{ item.html|raw }}</div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{
+  "name": "blogmd",
+  "authors": [
+    "Nikolai Plath <der.el.kuku@gmail.com>"
+  ],
+  "description": "A MarkDown blog engine",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

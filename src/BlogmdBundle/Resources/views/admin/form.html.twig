@@ -1,0 +1,70 @@
+{% extends '@App/base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/codemirror/codemirror-5.25.0/lib/codemirror.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/foldgutter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/codemirror/codemirror-5.25.0/theme/lesser-dark.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/js/blogmd.js') }}"></script>
+    <script src="{{ asset('assets/codemirror/codemirror-5.25.0/lib/codemirror.js') }}"></script>
+    <script src="{{ asset('assets/codemirror/codemirror-5.25.0/mode/markdown/markdown.js') }}"></script>
+    <script src="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/foldcode.js') }}"></script>
+    <script src="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/foldgutter.js') }}"></script>
+    <script src="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/markdown-fold.js') }}"></script>
+    <script>
+        var CodeMirror = CodeMirror.fromTextArea(document.getElementById('post_content'), {
+            lineWrapping: true,
+            extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+            foldGutter: true,
+            gutters: ["CodeMirror-foldgutter"],
+            viewportMargin: Infinity
+        });
+        //myCodeMirror.setOption("theme", 'lesser-dark');
+        $('a[data-toggle="tab"]').on('click', function (e) {
+            console.log($(e.target).attr('href'));
+
+            if ('#previewId' == $(e.target).attr('href')) {
+                Blogmd.preview(CodeMirror.getValue(), '#previewId', '{{ path('preview') }}');
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-xs-8">
+            {{ form_errors(form.title) }}
+            {{ form_widget(form.title) }}
+        </div>
+        <div class="col-xs-4">
+            {{ form_errors(form.publishedAt) }}
+            {{ form_widget(form.publishedAt) }}
+        </div>
+    </div>
+    {{ form_errors(form.content) }}
+
+    <ul class="nav nav-tabs">
+        <li class="pull-right">
+            <a class="pull-right" href="{{ path('markdown_help') }}" target="_blank">Markdown Help</a>
+        </li>
+        <li class="active"><a href="#writeId" data-toggle="tab">"Write"</a></li>
+        <li><a href="#previewId" data-toggle="tab">"Preview"</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="writeId">
+            {{ form_widget(form.content) }}
+        </div>
+        <div class="tab-pane" style="min-height: 200px;" id="previewId"></div>
+    </div>
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-info">Save</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
