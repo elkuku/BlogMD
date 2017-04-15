@@ -6,12 +6,34 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-<script src="{{ asset('bundles/app/js/prism.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/prism.js') }}"></script>
 {% endblock %}
 
 {% block body %}
 
     {{ post.content|md2html }}
+
+    <hr />
+
+    <div class="row">
+        <div class="col-xs-6 text-center">
+            {% if previousPost %}
+
+                <a href="{{ path('blog_post', {'slug': previousPost.slug}) }}">
+                    &lArr;&nbsp;{{ previousPost.title }}&nbsp;&lArr;
+                </a>
+
+            {% endif %}
+        </div>
+        <div class="col-xs-6 text-center">
+            {% if nextPost %}
+                <a href="{{ path('blog_post', {'slug': nextPost.slug}) }}">
+                    &rArr;&nbsp;{{ nextPost.title }}&nbsp;&rArr;
+
+                </a>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
 

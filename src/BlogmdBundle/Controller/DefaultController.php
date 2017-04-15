@@ -32,7 +32,26 @@ class DefaultController extends Controller
      */
     public function showAction(Post $post)
     {
-        return $this->render('@App/default/item.html.twig', ['post' => $post]);
+        $posts = $this->getDoctrine()->getRepository(Post::class)->findBy([], ['publishedAt' => 'DESC']);
+
+        $nextPost = null;
+        $previousPost = null;
+
+        foreach ($posts as $i => $p) {
+            if ($p->getId() === $post->getId()) {
+                if ($i < count($posts) - 1) {
+                    $nextPost = $posts[$i + 1];
+                }
+                break;
+            }
+
+            $previousPost = $p;
+        }
+        return $this->render('@App/default/item.html.twig', [
+            'post' => $post,
+            'previousPost' => $previousPost,
+            'nextPost' => $nextPost,
+            ]);
     }
 
     /**
