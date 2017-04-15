@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('assets/codemirror/codemirror-5.25.0/lib/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/foldgutter.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/codemirror/codemirror-5.25.0/theme/lesser-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/prism.css') }}">
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
@@ -14,6 +15,7 @@
     <script src="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/foldcode.js') }}"></script>
     <script src="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/foldgutter.js') }}"></script>
     <script src="{{ asset('assets/codemirror/codemirror-5.25.0/addon/fold/markdown-fold.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/prism.js') }}"></script>
     <script>
         var CodeMirror = CodeMirror.fromTextArea(document.getElementById('post_content'), {
             lineWrapping: true,
@@ -28,6 +30,7 @@
 
             if ('#previewId' == $(e.target).attr('href')) {
                 Blogmd.preview(CodeMirror.getValue(), '#previewId', '{{ path('preview') }}');
+                // Rerun Prism syntax highlighting on the current page
             }
         });
     </script>

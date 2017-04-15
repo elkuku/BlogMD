@@ -26,6 +26,7 @@
                         out.html('Invalid response.');
                     } else {
                         out.html(r.data);
+                        Prism.highlightAll();
                     }
 
                     out.removeClass('loading')

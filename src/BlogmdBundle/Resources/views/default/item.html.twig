@@ -1,5 +1,14 @@
 {% extends '@App/base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/prism.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+<script src="{{ asset('bundles/app/js/prism.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 
     {{ post.content|md2html }}
