@@ -6,7 +6,6 @@
         <tr>
             <th>Date</th>
             <th>Title</th>
-            <th>Slug</th>
             <th>Action</th>
         </tr>
         {% for post in posts %}
@@ -15,9 +14,9 @@
                 <td>
                     <a href="{{ path('blog-item', {'id': post.id}) }}">{{ post.title }}</a>
                 </td>
-                <td>{{ post.slug }}</td>
                 <td>
                     <a href="{{ path('blog-edit', {'id': post.id}) }}">Edit</a>
+                    <a href="{{ path('blog-delete', {'id': post.id}) }}">Delete</a>
                 </td>
             </tr>
             {% else %}

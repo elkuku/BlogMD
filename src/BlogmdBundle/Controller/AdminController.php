@@ -102,6 +102,24 @@ class AdminController extends Controller
     }
 
     /**
+     * @Route("/delete/{id}", name="blog-delete")
+     *
+     * @param Post    $post
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(Post $post)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($post);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Post has been deleted.');
+
+        return $this->redirectToRoute('blog-list');
+    }
+
+    /**
      * @Route("/blog/{id}", name="blog-item")
      * @param Post $post
      *
